@@ -12,3 +12,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.col-md-4 {
+  margin-bottom: 15px;
+}
+
+/*card styles*/
+.card-title, .card-text .city {
+  text-transform: capitalize;
+}
+.card-text {
+  text-align: left;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+.form-control-borderless {
+  border: none;
+}
+
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
