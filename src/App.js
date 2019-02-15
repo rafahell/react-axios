@@ -38,9 +38,7 @@ class App extends Component {
     };
     // this.handleSubmit = this.handleSubmit.bind(this);
     this.searchValue = this.searchValue.bind(this);
-    
   }
-  
   
   //fetch api axios
   getUsers() {
