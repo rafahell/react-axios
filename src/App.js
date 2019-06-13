@@ -46,7 +46,7 @@ class App extends Component {
       .then(res => {
         const users = res.data.results;
         this.setState({ 
-          users,
+        users,
           isLoaded: true 
         })
       })
@@ -75,12 +75,9 @@ class App extends Component {
     this.setState({viewport});
   }
 
-
   _renderPopup(e) {
-    
     const {popupInfo} = this.state;
     const city = e.location.city;
-    
     
     return popupInfo && (
       <Popup tipSize={5}
@@ -94,7 +91,6 @@ class App extends Component {
     );
   }
 
-
   render() {
     const {isLoaded, users, searchTerm, viewport} = this.state;
 
@@ -107,12 +103,12 @@ class App extends Component {
               <form className="card card-sm">
               <Card>
                   <Card.Body className=" row no-gutters align-items-center">
-                        <Col md="auto">
-                            <i className="fas fa-search h4 text-body"></i>
-                        </Col>
-                        <Col>
-                          <input className="form-control form-control-lg form-control-borderless" type="search" placeholder="Search" onChange={this.searchValue} />
-                        </Col>
+                      <Col md="auto">
+                          <i className="fas fa-search h4 text-body"></i>
+                      </Col>
+                      <Col>
+                        <input className="form-control form-control-lg form-control-borderless" type="search" placeholder="Search" onChange={this.searchValue} />
+                      </Col>
                   </Card.Body>
                 </Card>
               </form>
@@ -124,7 +120,7 @@ class App extends Component {
           {isLoaded ?
             <Container>
               <Row>
-              {users.filter(isSearched(searchTerm)).map((user) => 
+              {users.filter(isSearched(searchTerm)).map((user, index) => 
                   <Col xs={12} sm={12} md={6} key={user.id.value}>
                   <Card>
                       <Card.Img variant="top" src={user.picture.large} />
@@ -141,17 +137,18 @@ class App extends Component {
                           width="100%"
                           height="400px"
                           mapStyle="mapbox://styles/mapbox/dark-v9"
-                          //onViewportChange={this._updateViewport}
+                          //onViewportChange={this._updateViewport()}
                           mapboxApiAccessToken={TOKEN} >
                           
-                          <Marker 
+                          <Marker key={`marker-${index}`}
                             longitude={Number(user.location.coordinates.longitude)}
                             latitude={Number(user.location.coordinates.latitude)}
                             // offsetTop={-20}
                             // offsetLeft={-10}
                             >
-                            <Pin size={20} onClick={() => this.setState({popupInfo: user })}/>
+                            <Pin key={`pin-${index}`} size={20} onClick={() => this.setState({popupInfo: user })}/>
                           </Marker>
+                          
                            {this._renderPopup(user)}
                           <div className="nav" style={navStyle}>
                             <NavigationControl  onViewportChange={(viewport) => this.setState({viewport})} /> 
